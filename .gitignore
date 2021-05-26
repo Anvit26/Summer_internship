@@ -1,0 +1,4 @@
+# ignore ALL files in ANY directory named temp
+Practice/MERN/001/*
+Practice/MERN/002/*
+Practice/MERN/003/guide-project/node_modules/*
