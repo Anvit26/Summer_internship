@@ -9,7 +9,7 @@ const Box = () =>{
     useEffect( () => {
         const fetchApi = async () =>{
             //Change API KEY
-        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${search}&APPID=${/*Change API KEY*/}&units=metric`;
+        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${search}&APPID=d518db2d2155ef96b9b55168c6f06cfd&units=metric`;
             const resp = await fetch(apiUrl);
             const respJson = await resp.json();
             console.log(respJson); 
