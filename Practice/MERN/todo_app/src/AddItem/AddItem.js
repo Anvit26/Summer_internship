@@ -1,20 +1,25 @@
 import React, {useState} from 'react';
 import DisplayItems from '../DisplayItems/DisplayItems'; 
 
-const AddItem = () =>{
+const AddItem = (props) =>{
     const[todoItem,setTodoItem] = useState({
         date:'',
         description:'',
         priority:''
     })
-    const [items,setItems] = useState([]);
+    
+    //Done From App Component
+    //const [items,setItems] = useState([]);
 
     const submitHandler = (e) =>{
         e.preventDefault();
         if(todoItem.date && todoItem.description && todoItem.priority){
-            const newItem = {...todoItem, id: new Date().getDate().toString()}
-            setItems([...items,newItem]);
+            const newItem = {...todoItem, id: new Date().getMilliseconds().toString()}
+            //setItems([...items,newItem]);
+            props.AddItemHandler({newItem});
             setTodoItem({date:'',description:'',priority:''}); 
+        }else{
+            alert('All Fields Required');
         }
     }
 
@@ -72,7 +77,7 @@ const AddItem = () =>{
                     Add Item
                     </button>
             </form>
-            <DisplayItems data={items}/>
+            {/*<DisplayItems data={items}/>*/}
         </article>
         </>
     );

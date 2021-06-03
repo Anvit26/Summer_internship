@@ -1,24 +1,21 @@
 import React from 'react';
 
 const DisplayItem = (props) =>{
-
-const removeItem = (id) =>{
-
-}
-
+  const deleteHandler = (id) =>{
+      console.log(id);
+    props.getItemId(id);
+  }
     return(
         <>
         {
-            //console.log(props.data)
-            props.data.map((item) => {
-            const {id,description,date,priority} = item;
+            props.todo_items.map((item) => {
+            const dMap = item.item.newItem;
             return(
-                <div className={priority === "Top" ? "item item_top" : "item"} key={id}>
-                  {/*<div className='item 'key={id}>*/}
-                <h4>{date}</h4>
-                    <p>{description}</p>
+                <div className={dMap.priority === "Top" ? "item item_top" : "item"} key={dMap.id}>
+                    <h4>{dMap.date}</h4>
+                    <p>{dMap.description}</p>
                     <button 
-                    onClick={() => removeItem(id)}
+                    onClick={() =>  deleteHandler(dMap.id)}
                     >Remove
                     </button>
                 </div>
