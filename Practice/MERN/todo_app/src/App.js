@@ -1,6 +1,8 @@
 import React, { useState,useEffect } from 'react';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import AddItem from './AddItem/AddItem'; 
 import DisplayItem from './DisplayItems/DisplayItems';
+import ItemDetail from './ItemDetail/ItemDetail';
 
 function App() {
   const LOCAL_STORAGE_KEY = 'to-do-list';
@@ -31,8 +33,32 @@ useEffect(() =>{
 
   return (
     <div className="App">
-      <AddItem AddItemHandler={addItemHandler} />
-      <DisplayItem todo_items={todoItems} getItemId={removeItem}/>
+      <Router>
+        <Switch>
+          <Route
+            path="/"
+            exact
+            render={(props) =>(
+              <DisplayItem 
+                {...props}
+                todo_items={todoItems} 
+                getItemId={removeItem}/>
+            )}/>
+          <Route 
+            path="/add"
+            render={(props) =>(
+              <AddItem
+              {...props}
+              AddItemHandler={addItemHandler} />
+            )}/>
+        {/*<AddItem AddItemHandler={addItemHandler} />
+        <DisplayItem todo_items={todoItems} getItemId={removeItem}/>*/}
+        </Switch>
+        <Route 
+          path="/todoItem/:id"
+          component={ItemDetail}
+        />
+      </Router>
     </div>
   );
 }

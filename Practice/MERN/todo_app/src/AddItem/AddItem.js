@@ -18,6 +18,7 @@ const AddItem = (props) =>{
             //setItems([...items,newItem]);
             props.AddItemHandler({newItem});
             setTodoItem({date:'',description:'',priority:''}); 
+            props.history.push("/");
         }else{
             alert('All Fields Required');
         }

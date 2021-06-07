@@ -178,6 +178,23 @@ p {
   align-items: center;
   border-radius: var(--radius);
 }
+.item_single {
+  background: var(--clr-white);
+  display: flex;
+  justify-content: space-between;
+  max-width: 1000vw;
+  height: 20vh ;
+  margin: 2rem auto;
+  align-items: center;
+  border-radius: var(--radius);
+}
+.item_single div{
+  display: block;
+  justify-content: space-between;
+  margin: 2rem auto;
+  align-items: center;
+  border-radius: var(--radius);
+}
 .item_top {
   background: var(--clr-green-light);
   display: flex;
@@ -187,6 +204,16 @@ p {
   align-items: center;
   border-radius: var(--radius);
 }
+.btn_back{
+  /*background: transparent;*/
+  justify-content:center;
+  border-color: transparent;
+  color: var(--clr-primary-5);
+  letter-spacing: var(--spacing);
+  cursor: pointer;
+  align-content: center;
+}
+
 .item button,
 .item a {
   background: transparent;
