@@ -1,22 +1,19 @@
 import React, {useState} from 'react';
-import DisplayItems from '../DisplayItems/DisplayItems'; 
 
-const AddItem = (props) =>{
-    const[todoItem,setTodoItem] = useState({
-        date:'',
-        description:'',
-        priority:''
-    })
+const UpdateItem = (props) =>{
+    console.log(props);
+    const {id,date,description,priority} = props.location.state.item ;
+    //console.log(id,date,description,priority);
+    const[updateTodoItem,setUpdateTodoItem] = useState(
+        {id,date,description,priority}
+    )
+    //setUpdateTodoItem({id,date,description,priority});
     
-    //Done From App Component
-    //const [items,setItems] = useState([]);
-
-    const submitHandler = (e) =>{
+    const updateHandler = (e) =>{
         e.preventDefault();
-        if(todoItem.date && todoItem.description && todoItem.priority){
-            //const newItem = {...todoItem, id: new Date().getMilliseconds().toString()}
-            props.AddItemHandler({...todoItem, id: new Date().getMilliseconds().toString()});
-            setTodoItem({date:'',description:'',priority:''}); 
+        if(date && description && priority){
+            props.updateItemHandler(updateTodoItem);
+            setUpdateTodoItem({date:'',description:'',priority:''}); 
             props.history.push("/");
         }else{
             alert('All Fields Required');
@@ -24,9 +21,10 @@ const AddItem = (props) =>{
     }
 
     const onChangeHandler = (e) =>{
+        console.log(e);
         const inputName = e.target.name;
         const inputValue = e.target.value;
-        setTodoItem({...todoItem,[inputName]:inputValue}) 
+        setUpdateTodoItem({...updateTodoItem,[inputName]:inputValue});
     };
 
     return (
@@ -39,8 +37,8 @@ const AddItem = (props) =>{
                         type='date'
                         id='inputDate'
                         name='date'
-                        value={todoItem.date}
-                        onChange={onChangeHandler}
+                        value={date}
+                        onChange={(e) => setUpdateTodoItem({...updateTodoItem,date:e.target.value})}
                     />
                 </div>
                 <div className='form-control'>
@@ -49,38 +47,30 @@ const AddItem = (props) =>{
                         type='text'
                         id='inputDescription'
                         name='description'
-                        value={todoItem.description}
-                        onChange={onChangeHandler}
+                        value={description}
+                        onChange={(e) => setUpdateTodoItem({...updateTodoItem,description:e.target.value})}
                     />
                 </div>
                 <div className='form-control'>
                     <lable htmlFor='priority'>Priority</lable>
             <select
-              onChange={onChangeHandler}
+             onChange={(e) => setUpdateTodoItem({...updateTodoItem,priority:e.target.value})}
               name='priority'
             >
-              <option value="">Select Option</option>
+              <option value={priority}>{priority}</option>
               <option value="Top">Top</option>
               <option value="Low">Low</option>
-            </select>
-                    {/*<input
-                        type='text'
-                        id='inputPriority'
-                        name='priority'
-                        value={todoItem.priority}
-                        onChange={onChangeHandler}
-                    />*/}    
+            </select>  
                 </div>
                 <button 
                     type='submit'
-                    onClick={submitHandler}>
-                    Add Item
+                    onClick={updateHandler}>
+                    Update Item
                     </button>
             </form>
-            {/*<DisplayItems data={items}/>*/}
         </article>
         </>
     );
 };
 
-export default AddItem;
+export default UpdateItem;

@@ -14,6 +14,9 @@ const ItemDetail = (props) =>{
         <Link to="/">
             <button className='btn_back'>Home</button>
         </Link>
+        <Link to={{pathname:"/update",state:{item:props.location.state.todoItem}}}>
+            <button className='btn_back'>Update</button>
+        </Link>
         </div>
         </div>
     )

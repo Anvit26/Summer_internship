@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 
 const DisplayItem = (props) =>{
+    console.log(props);
   const deleteHandler = (id) =>{
       console.log(id);
     props.getItemId(id);
@@ -13,20 +14,23 @@ const DisplayItem = (props) =>{
         </div>
         {
             props.todo_items.map((item) => {
-            const dMap = item.item.newItem;
-            return(
+                //console.log(item);
+                const dMap = item;
+            //const dMap = item.item.newItem;
+            return(<>{
                 <div className={dMap.priority === "Top" ? "item item_top" : "item"} key={dMap.id}>
                     <h4>{dMap.date}</h4>
                     <Link 
                         to={{pathname:`/todoItem/${dMap.id}`,
-                        state:{todoItem:item.item.newItem}}}>
+                        state:{todoItem:item}}}>
                         <p>{dMap.description}</p>
                     </Link>
                     <button 
                     onClick={() =>  deleteHandler(dMap.id)}
                     >Remove
                     </button>
-                </div>
+            </div>}
+                </>
             )
         })
     }
