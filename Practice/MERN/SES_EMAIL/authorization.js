@@ -1,7 +1,9 @@
 const jwt = require('jsonwebtoken');
 
+const secKey = 'QWERTYYUIO!@#$%^&';
+
 module.exports = (creadentials = [])=>{
-    return ((req,res,next)=>{
+    return ((req,res,next)=>{        
         console.log('Auth-middleware');
         if(typeof creadentials === 'string'){
             creadentials =[creadentials];
@@ -13,7 +15,8 @@ module.exports = (creadentials = [])=>{
         }else{
             //Bearer
             const tokenBody = token.slice(7);
-            jwt.verify(tokenBody,'SuperSecreat',(err,decoded)=>{
+            //jwt.verify(tokenBody,'SuperSecreat',(err,decoded)=>{
+            jwt.verify(tokenBody,secKey,(err,decoded)=>{
                 if(err){
                     console.log(`JWT Error: ${err}`);
                     return res.status(401).send("Error: Access Denied");

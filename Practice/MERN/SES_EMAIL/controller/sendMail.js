@@ -1,33 +1,24 @@
 const aws = require('aws-sdk');
 const ses = new aws.SES({region:'ap-south-1'});
 
+// To Send Mail To Clients Using AWS-SES
 const sendMail = (mailList,subject,message) =>{
-    // let mailList = splitRes;
-    //console.log(mailList);
     let params ={
-        Destination:{
-            ToAddresses:mailList,
-        },
-        Source:"daveanvit@gmail.com",
+        Destination:{ToAddresses:mailList},
+        Source:"###############",
         Message: {
             Body: {
-             Text: {
-              Charset: "UTF-8", 
-              Data: message
-             }
+             Text: {Charset: "UTF-8", Data: message}
             }, 
-            Subject: {
-             Charset: "UTF-8", 
-             Data: subject
-            }
+            Subject: {Charset: "UTF-8",Data: subject}
            }, 
     };
-    //console.log(params);
-    ses.sendEmail(params,(err,data)=>{
-        if(err){
-            console.log(err);
+
+    ses.sendEmail(params,(error,data)=>{
+        if(error){
+            console.log("SEND_MAIL_ERROR: ",error);
         }else{
-            console.log(data);
+            console.log("SEND_MAIL_DATA: ",data);
         }
     });
 };

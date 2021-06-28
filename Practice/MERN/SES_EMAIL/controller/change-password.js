@@ -2,12 +2,12 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../model/user');
 
-const key = 'QWERTYYUIO!@#$%^&';
+const secKey = 'QWERTYYUIO!@#$%^&';
 
 const changePassword = async (req,res) =>{
     const{token,newpassword} = req.body;
     try{
-        const user = jwt.verify(token,key);
+        const user = jwt.verify(token,secKey);
         const _id = user.id;
         const password = await bcrypt.hash(newpassword,10);
         await User.updateOne(
@@ -16,9 +16,10 @@ const changePassword = async (req,res) =>{
                 $set:{password}
             }
         )
-        return res.json({status:'ok'});
+        return res.status(200).json({status:'ok'});
     }catch(error){
-        return res.json({status:'error'})
+        console.log("CHANGE_PASSWORD: ",error);
+        return res.status(401).json({status:'error'})
     }
 };
 

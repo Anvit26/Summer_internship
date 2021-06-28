@@ -1,10 +1,9 @@
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 const User = require('../model/user');
 
 const signup = async (req,res)=>{
-    //console.log(req);
     const {username,password} = req.body;
+    console.log("SIGN_UP_ATTEMPT: ",username);
     if(!username || typeof username !== 'string'||!password ){
         return res.status(401).json({status:"Enter All Data"});
     }
@@ -18,6 +17,7 @@ const signup = async (req,res)=>{
          if(error.code===11000){
             return res.status(401).json({status:"User Already Exist"});
          }
+         console.log("SIGN_UP_ERROR: ",error);
          throw res.status(401).json({status:"Error"});
      }  
     res.status(200).json({msg:"SUCESS"});
