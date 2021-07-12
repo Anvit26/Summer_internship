@@ -16,6 +16,7 @@ const upload = multer({storage:fileEngine});
 
 // Call To File Upload API
 const fileUploadPost = (req,res)=>{
+    //console.log(req.body)
     const mailInfo =  JSON.parse(req.body.mailInfo);
     axios.get(`http://localhost:5000/readFile/${req.file.filename}`,{data:mailInfo})
         .then(()=>{

@@ -14,8 +14,7 @@ function SendMail(){
     const [selectedFile,setSelectedFile] = useState();
     const [isFilePicked,setIsFilePicked] = useState(false);
     const [mailDetails,setMailDetails] = useState({
-        subject:'',
-        message:'',
+        subject:'',message:'',
     });
 
     const onChangeMailInfo = (e) =>{
@@ -57,7 +56,7 @@ function SendMail(){
                 <div className='flex-box-container-1'>
                     <form className='form-horizontal'>
                         <div className='form-group'>
-                            <label for='fileMailInput'>File Upload</label>
+                            {/* <label for='fileMailInput'>File Upload</label> */}
                             <input 
                              type='file'
                              className='form-control' 
@@ -83,7 +82,7 @@ function SendMail(){
                 )}
                 <div className='flex-box-container-1'>
                     <div className='form-group'>
-                        <lable for='subjectInput'>Mail Subject</lable>
+                        {/* <lable for='subjectInput'>Mail Subject</lable> */}
                         <input 
                          type='text'
                          className='form-control'
@@ -92,11 +91,11 @@ function SendMail(){
                          name='subject'
                          value={mailDetails.subject}
                          onChange={onChangeMailInfo}
-                         style={{width:'50vw'}}
+                         style={{width:'30vw'}}
                         />
                     </div>
                         <div className='form-group'>
-                        <label for='messageInput'>Message</label>
+                        {/* <label for='messageInput'>Message</label> */}
                         <textarea 
                          className='form-control'
                          id='messageInput'
@@ -104,7 +103,7 @@ function SendMail(){
                          name='message' 
                          value={mailDetails.message}
                          onChange={onChangeMailInfo} 
-                         style={{width:'50vw'}}
+                         style={{width:'30vw'}}
                         />
                     </div>
                 </div>
@@ -112,7 +111,7 @@ function SendMail(){
                     <div>
                         <button 
                         className='btn btn-primary'
-                        onClick={onSubmitHandler}>Upload</button>
+                        onClick={onSubmitHandler}>Send Mails</button>
                     </div>
                 </div>
             </div> 

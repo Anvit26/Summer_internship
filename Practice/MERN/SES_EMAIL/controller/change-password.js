@@ -16,10 +16,10 @@ const changePassword = async (req,res) =>{
                 $set:{password}
             }
         )
-        return res.status(200).json({status:'ok'});
+        return res.status(200).json({msg:'sucess'});
     }catch(error){
         console.log("CHANGE_PASSWORD: ",error);
-        return res.status(401).json({status:'error'})
+        return res.status(401).json({msg:'error'})
     }
 };
 

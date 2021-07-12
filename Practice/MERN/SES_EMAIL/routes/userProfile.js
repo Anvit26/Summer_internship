@@ -5,8 +5,6 @@ const router = express.Router();
 
 // Get User Profile
 router.get('/',authorization(),getProfile);
-// Add User Profile
-router.post('/',authorization(),createProfile);
 // Upadte User Profile
 router.put('/',authorization(),updateProfile)
 

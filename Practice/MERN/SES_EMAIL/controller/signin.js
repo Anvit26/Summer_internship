@@ -6,7 +6,7 @@ const secKey = 'QWERTYYUIO!@#$%^&'; //JWT SECRET
 
 // Verify User Data
 const signin = async (req,res)=>{
-
+    // console.log(req);
     const {username,password} = req.body;
     console.log("SIGN_IN_ATTEMPT: ",username);
     
@@ -16,13 +16,20 @@ const signin = async (req,res)=>{
     
     const user = await User.findOne({username}).lean();
     if(!user){
-        return res.status(401).json({status:"Enter All Data"});    
+        return res.status(401).json({status:"No User Found"});    
     }
     if(await bcrypt.compare(password,user.password)){
+        let userType;
+        if(user.isAdmin == true){
+            userType = 'admin';
+        }else{
+            userType = 'user';
+        }
+        // console.log(user);
         const token = jwt.sign({
-            id:user._id,username:user.username
+            id:user._id,username:user.username,type:user.isAdmin
         },secKey);                              //JWT SECRET
-        return res.status(200).json({status:'ok',data:token});
+        return res.status(200).json({status:'ok',userType,data:token});
     }else{
         return res.status(401).json({status:'error',data:'invalid information'});
     }
